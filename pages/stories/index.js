@@ -5,9 +5,9 @@ import React from "react";
 
 export default function allStories() {
     return (
-        <div>
-            <StoryCreate />
+        <>
             <StoryList />
-        </div>
+            <StoryCreate />
+        </>
     );
 }

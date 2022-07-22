@@ -49,7 +49,7 @@ const StoryList = () => {
 
     return (
         <div>
-            <h1 style={{textAlign: 'center', marginTop: '40px'}}>List of stories...</h1>
+            <h3 style={{textAlign: 'center', marginTop: '40px'}}>List of stories...</h3>
 
             <MyInput
                 type='text'

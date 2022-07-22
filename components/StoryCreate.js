@@ -39,7 +39,7 @@ const StoryCreate = (props) => {
     return (
         <div>
             <form>
-                <h1 style={{textAlign: 'center', marginTop: '40px'}}>New story</h1>
+                <h3 style={{textAlign: 'center', marginTop: '40px'}}>New story</h3>
                 <MyInput
                     type='text'
                     placeholder='Title'
