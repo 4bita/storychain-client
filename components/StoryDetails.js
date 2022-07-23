@@ -3,6 +3,7 @@ import axios from "axios";
 import AppContext from "./AppContext";
 import Candidate from "./Candidate";
 import CandidateAdd from "./CandidateAdd";
+import SpinnerCat from "./UI/spinner/SpinnerCat";
 
 
 async function loadCandidates(storyId, setCandidates, context) {
@@ -66,14 +67,13 @@ export default function StoryDetails({storyId}) {
 
     return (
         <div>
-            {/*<MyButton onClick={openDetails} style={{fixed: 'right', marginTop: '20px'}}>Back</MyButton>*/}
-            <br /><br />
+            <br />
 
             <h2 style={{margin: '20px'}}>Official story:</h2>
             <div className="CommittedStory">
                 {
                     subStories === null
-                        ? <div>Loading...</div>
+                        ? <SpinnerCat />
                         : subStories.map(s =>
                             <div key={s.id}>
                                 <h3 style={{marginTop: '20px'}}>{s.title}</h3>
@@ -88,7 +88,7 @@ export default function StoryDetails({storyId}) {
             <h3 style={{paddingTop: '80px', margin: '20px'}}>Candidates to continue:</h3>
             {
                 candidates === null
-                    ? <div>Loading...</div>
+                    ? <SpinnerCat />
                     : candidates.map(c =>
                         <Candidate key={c.id} candidate={c} />
                     )

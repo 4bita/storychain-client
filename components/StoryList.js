@@ -4,6 +4,7 @@ import axios from "axios";
 import Story from "./Story";
 import MyInput from "./UI/input/MyInput";
 import AppContext from "./AppContext";
+import SpinnerCat from "./UI/spinner/SpinnerCat";
 
 
 async function loadStories(context, setStories) {
@@ -60,7 +61,7 @@ const StoryList = () => {
 
             {
                 stories === null
-                    ? <div>Loading...</div>
+                    ? <SpinnerCat />
                     : stories.map(story =>
                         <Story
                             id={story.key}

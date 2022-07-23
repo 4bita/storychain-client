@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { create } from 'ipfs-http-client';
 import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
