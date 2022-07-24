@@ -7,6 +7,12 @@ import MyButton from "../button/MyButton";
 function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) {
     const [showModal, setShowModal] = React.useState(false);
 
+    async function saveChanges(event) {
+        await onSave(event);
+        console.log('On save func finished. Close modal')
+        setShowModal(false);
+    }
+
     return (
         <>
             <div style={{ marginTop: "20px", justifyContent: "right", display: "flex" }}>
@@ -46,11 +52,7 @@ function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) 
                     <button className={styles.closeButton} onClick={() => setShowModal(false)}>
                         Close
                     </button>
-                    <button className={styles.saveButton} onClick={
-                        (event) => {
-                            onSave(event);
-                            setShowModal(false);
-                        }}>
+                    <button className={styles.saveButton} onClick={saveChanges}>
                         Save changes
                     </button>
                 </ModalFooter>

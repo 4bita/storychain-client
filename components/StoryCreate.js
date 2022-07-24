@@ -21,18 +21,35 @@ const StoryCreate = () => {
             const {path} = await (ipfs).add(storyJson);
             const ipfs_path = IPFS_URL_READ + path;
 
-            const res = await context.lensContract.methods
-                .post([context.profileId, ipfs_path, '0x5e70ffd2c6d04d65c3abeba64e93082cfa348df8', '0x', '0x0000000000000000000000000000000000000000', []])
-                .send({'from': context.userAccount});
+            alert(`Story '${story.title}' will be registered in blockchain after some time`)
 
-            console.log("first transaction passed")
-            const pub_id = parseInt(res.events[0].raw.topics[2]);
-            setStory({title: '', body: ''});
-
-            return await context.storyContract.methods
-                .registerStory([context.profileId, pub_id])
-                .send({'from': context.userAccount});
+            context.lensContract.methods
+                .post([
+                    context.profileId,
+                    ipfs_path,
+                    '0x5e70ffd2c6d04d65c3abeba64e93082cfa348df8',
+                    '0x',
+                    '0x0000000000000000000000000000000000000000',
+                    []
+                ])
+                .send({ from: context.userAccount, gasPrice: 50000000000 })
+                .on('transactionHash', console.log)
+                .on('receipt', (receipt) => {
+                    const pub_id = parseInt(receipt.events[0].raw.topics[2]);
+                    registerStory(pub_id)
+                })
+                .on('error', console.error);
         }
+    }
+
+    async function registerStory(pub_id) {
+        context.storyContract.methods
+            .registerStory([context.profileId, pub_id])
+            .send({ from: context.userAccount, gasPrice: 50000000000 })
+            .on('receipt', (receipt) => {
+                console.log('Story was registered successfully. Receipt: ', receipt)
+            })
+            .on('error', console.error);
     }
 
     return (

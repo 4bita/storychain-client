@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import MyButton from "./UI/button/MyButton";
 import AppContext from "./AppContext";
+import styles from "../styles/Candidate.module.css";
 
 
 const Candidate = (props) => {
@@ -22,14 +23,14 @@ const Candidate = (props) => {
     }
 
     return (
-        <div className='Candidate'>
-            <div className="Candidate__content">
+        <div className={styles.candidateCard}>
+            <div>
                 <strong>{props.candidate.title}</strong>
                 <div>
                     {props.candidate.body}
                 </div>
             </div>
-            <div className="Candidate__vote">
+            <div>
                 Votes: {votes}
                 <br />
                 <br />
