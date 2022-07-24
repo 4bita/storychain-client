@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import {useContext, useState} from 'react';
 import { create } from 'ipfs-http-client';
-import MyInput from "./UI/input/MyInput";
-import MyButton from "./UI/button/MyButton";
-import MyTextArea from "./UI/text_area/MyTextArea";
+import AppContext from "./AppContext";
+import StoryModal from "./UI/modal/StoryModal";
 
 const IPFS_URL_CREATE = "https://ipfs.infura.io:5001/api/v0";
 const IPFS_URL_READ = "https://ipfs.infura.io/ipfs/";
 
 
-const StoryCreate = (props) => {
-    const [story, setStory] = useState({title: '', body: ''})
+const StoryCreate = () => {
+    const [story, setStory] = useState({title: '', body: ''});
+    const context = useContext(AppContext);
 
     let addNewStory = async (e) => {
         e.preventDefault();
@@ -21,41 +21,30 @@ const StoryCreate = (props) => {
             const {path} = await (ipfs).add(storyJson);
             const ipfs_path = IPFS_URL_READ + path;
 
-            let res = await props.meta.lens_contract.methods
-                .post([props.meta.profileId, ipfs_path, '0x5e70ffd2c6d04d65c3abeba64e93082cfa348df8', '0x', '0x0000000000000000000000000000000000000000', []])
-                .send({'from': props.meta.userAccount});
+            const res = await context.lensContract.methods
+                .post([context.profileId, ipfs_path, '0x5e70ffd2c6d04d65c3abeba64e93082cfa348df8', '0x', '0x0000000000000000000000000000000000000000', []])
+                .send({'from': context.userAccount});
 
-
+            console.log("first transaction passed")
             const pub_id = parseInt(res.events[0].raw.topics[2]);
-            await props.meta.story_contract.methods
-                .registerStory([props.profileId, pub_id])
-                .send({'from': props.meta.userAccount});
-
-            props.addItem(newStory);
             setStory({title: '', body: ''});
+
+            return await context.storyContract.methods
+                .registerStory([context.profileId, pub_id])
+                .send({'from': context.userAccount});
         }
     }
 
     return (
-        <div>
-            <form>
-                <h3 style={{textAlign: 'center', marginTop: '40px'}}>New story</h3>
-                <MyInput
-                    type='text'
-                    placeholder='Title'
-                    rows='3'
-                    value={story.title}
-                    onChange={e => setStory({...story, title: e.target.value})}
-                />
-                <MyTextArea
-                    type='text'
-                    placeholder='Story body'
-                    value={story.body}
-                    onChange={e => setStory({...story, body: e.target.value})}
-                />
-                <MyButton onClick={addNewStory} style={{float: 'right'}}>New Story</MyButton>
-            </form>
-        </div>
+        <>
+            <StoryModal
+                title="Create a new story"
+                buttonName="Create new"
+                onTitleChange={e => setStory({...story, title: e.target.value})}
+                onBodyChange={e => setStory({...story, body: e.target.value})}
+                onSave={addNewStory}
+            />
+        </>
     );
 };
 

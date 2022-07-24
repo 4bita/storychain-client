@@ -1,7 +1,5 @@
 export default function Footer({ position }) {
-    console.log(position)
     const footerClasses = `text-center bg-gradient text-black mt-5 ${position}`
-    console.log(footerClasses)
     return (
         <footer className={ footerClasses } style={{backgroundColor: '#dbefdb'}}>
             <div className="container p-4 pb-0">
