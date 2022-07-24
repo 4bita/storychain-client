@@ -21,8 +21,6 @@ const StoryCreate = () => {
             const {path} = await (ipfs).add(storyJson);
             const ipfs_path = IPFS_URL_READ + path;
 
-            alert(`Story '${story.title}' will be registered in blockchain after some time`)
-
             context.lensContract.methods
                 .post([
                     context.profileId,
@@ -39,6 +37,8 @@ const StoryCreate = () => {
                     registerStory(pub_id)
                 })
                 .on('error', console.error);
+
+            alert(`Story '${story.title}' will be registered in blockchain after some time`);
         }
     }
 
