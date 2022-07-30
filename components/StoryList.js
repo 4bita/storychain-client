@@ -5,16 +5,31 @@ import Story from "./Story";
 import MyInput from "./UI/input/MyInput";
 import AppContext from "./AppContext";
 import SpinnerCat from "./UI/spinner/SpinnerCat";
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+
+const APIURL = 'https://api.thegraph.com/subgraphs/name/ilyatsupryk/storychain'
+
+const tokensQuery = `
+    {
+        stories {
+            id
+            profileId
+            pubId
+        }
+    }
+  
+`
+
+const client = new ApolloClient({
+    uri: APIURL,
+    cache: new InMemoryCache(),
+})
 
 
 async function loadStories(context, setStories) {
-    // Doesn't work now
-    // const events = await Meta.story_contract.getPastEvents(
-    //     "storyRegistered",
-    //     {fromBlock: 26984387, toBlock: 26984487});
-    // const profilePubIds = events.map(e => [e.returnValues[0], e.returnValues[1]]);
-
-    const profilePubIds = [[14423, 2], [14425, 4]];
+    const result = await client.query({query: gql(tokensQuery)});
+    const events_list = result.data.stories;
+    const profilePubIds = events_list.map(e => [e.profileId, e.pubId]);
 
     const stories = [];
     for(let ids of profilePubIds){
@@ -23,8 +38,8 @@ async function loadStories(context, setStories) {
         const pubContent = await response.data;
         const story = {
             id: Date.now(),
-            title: pubContent.name,
-            body: pubContent.content,
+            title: pubContent.title,
+            body: pubContent.body,
             key: ids
         };
         stories.push(story)
