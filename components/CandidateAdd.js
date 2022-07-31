@@ -1,7 +1,4 @@
 import React, {useState} from 'react';
-import MyInput from "./UI/input/MyInput";
-import MyButton from "./UI/button/MyButton";
-import MyTextArea from "./UI/text_area/MyTextArea";
 import StoryModal from "./UI/modal/StoryModal";
 
 const CandidateAdd = () => {
