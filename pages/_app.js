@@ -1,22 +1,23 @@
 import Head from "next/head";
-import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '../styles/globals.css';
 
-import AppContext from "../components/AppContext";
+import { ServerContext } from "../components/AppContext";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 
-import { initUserContext } from '../lib/init';
+import { initServerContext } from '../lib/init';
 
 
 function App({ Component, pageProps }) {
-    const [appContext, setAppContext] = useState(null);
+    const [serverContext, setServerContext] = useState(null);
+
     useEffect(() => {
-        initUserContext(setAppContext).catch(console.error);
+        initServerContext(setServerContext).catch(console.error);
     }, []);
 
     const { asPath } = useRouter();
@@ -32,9 +33,9 @@ function App({ Component, pageProps }) {
             <div className="container">
                 <div className="row justify-content-md-center">
                     <div className="col-8 align-self-center">
-                        <AppContext.Provider value={appContext}>
+                        <ServerContext.Provider value={serverContext}>
                             <Component {...pageProps} />
-                        </AppContext.Provider>
+                        </ServerContext.Provider>
                     </div>
                 </div>
             </div>

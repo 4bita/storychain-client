@@ -3,16 +3,15 @@ import { useState, useEffect, useContext } from "react";
 
 import Story from "./Story";
 import MyInput from "./UI/input/MyInput";
-import AppContext from "./AppContext";
 import SpinnerCat from "./UI/spinner/SpinnerCat";
-
+import { ServerContext } from "./AppContext";
 import { loadStories } from '../lib/loader';
 
 
 const StoryList = () => {
     const router = useRouter();
     const [stories, setStories] = useState(null);
-    const context = useContext(AppContext);
+    const context = useContext(ServerContext);
 
     useEffect(() => {
         if(context){

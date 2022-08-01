@@ -1,12 +1,10 @@
-import {useContext, useState} from 'react';
-import AppContext from "./AppContext";
+import { useState } from 'react';
 import StoryModal from "./UI/modal/StoryModal";
 import { addNewStory } from '../lib/story.js';
 
 
 const StoryCreate = () => {
     const [story, setStory] = useState({title: '', body: ''});
-    const context = useContext(AppContext);
 
     return (
         <>

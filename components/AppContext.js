@@ -1,5 +1,4 @@
 import React from "react";
 
-const AppContext = React.createContext(null);
-
-export default AppContext;
+export const ServerContext = React.createContext(null);
+export const UserContext = React.createContext(null);
