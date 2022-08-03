@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import AppContext from "./AppContext";
+import { ServerContext } from "./AppContext";
 import Candidate from "./Candidate";
 import CandidateAdd from "./CandidateAdd";
 import SpinnerCat from "./UI/spinner/SpinnerCat";
@@ -53,7 +53,7 @@ async function loadSubStories(storyId, setSubStories, context) {
 export default function StoryDetails({storyId}) {
     const [candidates, setCandidates] = useState(null);
     const [subStories, setSubStories] = useState(null);
-    const context = useContext(AppContext);
+    const context = useContext(ServerContext);
 
     useEffect(() => {
         if(context && storyId)

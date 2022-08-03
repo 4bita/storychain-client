@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {  useEffect, useState } from 'react';
 import MyButton from "./UI/button/MyButton";
-import AppContext from "./AppContext";
+import { getUserContext } from "../lib/init";
 import styles from "../styles/Candidate.module.css";
 
 
 const Candidate = (props) => {
-    const context = useContext(AppContext);
+    const context = getUserContext();
     const [votes, setVotes] = useState(0);
 
     useEffect(() => {
