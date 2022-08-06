@@ -1,53 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { ServerContext } from "./AppContext";
 import Candidate from "./Candidate";
 import CandidateAdd from "./CandidateAdd";
 import SpinnerCat from "./UI/spinner/SpinnerCat";
 
-
-async function loadCandidates(storyId, setCandidates, context) {
-    const sub_ids = await context.storyContract.methods.getStory(storyId).call();
-    const level = sub_ids.length - 1;
-
-    const candidate_ids = await context.storyContract.methods.listStoryItemCandidates(storyId, level).call();
-
-    const candidates = [];
-    for(let cand_id of candidate_ids) {
-        const pub = await context.lensContract.methods.getPub(cand_id.profileId, cand_id.pubId).call();
-        const response = await axios.get(pub.contentURI);
-        const cond_data = response.data;
-
-        const votes = await context.storyContract.methods.getStoryItemCandidateVotes(
-            storyId, level, [cand_id.profileId, cand_id.pubId]).call();
-
-        candidates.push({
-            id: Date.now(),
-            title: cond_data.name,
-            body: cond_data.content,
-            votes: votes,
-            head: storyId,
-            level: level,
-            candidate_key: [cand_id.profileId, cand_id.pubId],
-        });
-    }
-    setCandidates(candidates);
-}
-
-
-async function loadSubStories(storyId, setSubStories, context) {
-    const subStories = [];
-    const sub_ids = await context.storyContract.methods.getStory(storyId).call();
-
-    for(let sub_id of sub_ids) {
-        const sub = await context.lensContract.methods.getPub(sub_id.profileId, sub_id.pubId).call();
-        const response = await axios.get(sub.contentURI);
-        const sub_data = response.data;
-
-        subStories.push({id: Date.now(), title: sub_data.name, body: sub_data.content});
-    }
-    setSubStories(subStories);
-}
+import { loadCandidates, loadSubStories } from "../lib/loader";
 
 
 export default function StoryDetails({storyId}) {
@@ -94,7 +51,12 @@ export default function StoryDetails({storyId}) {
                     )
             }
 
-            <CandidateAdd />
+            <CandidateAdd
+                storyHead={ storyId }
+                onAdd={(new_candidate) => {
+                    setCandidates([...candidates, new_candidate]);
+                }}
+            />
         </div>
     );
 }

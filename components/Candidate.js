@@ -1,26 +1,17 @@
 import React, {  useEffect, useState } from 'react';
 import MyButton from "./UI/button/MyButton";
-import { getUserContext } from "../lib/init";
 import styles from "../styles/Candidate.module.css";
+import { addCandidateVote } from "../lib/voting";
 
 
 const Candidate = (props) => {
-    const context = getUserContext();
     const [votes, setVotes] = useState(0);
 
     useEffect(() => {
         setVotes(props.candidate.votes);
     }, [])
 
-
-    async function addStoryVote() {
-        context.storyContract.methods
-            .voteStoryItemCandidate(props.candidate.head, props.candidate.level, props.candidate.candidate_key)
-            .send({'from': context.userAccount})
-            .on('receipt', function(receipt) {
-                setVotes(votes + 1);
-            });
-    }
+    const onVote = () => {setVotes(votes + 1);}
 
     return (
         <div className={styles.candidateCard}>
@@ -34,7 +25,7 @@ const Candidate = (props) => {
                 Votes: {votes}
                 <br />
                 <br />
-                <MyButton onClick={addStoryVote}>Like</MyButton>
+                <MyButton onClick={ addCandidateVote.bind(null, props.candidate, onVote) }>Like</MyButton>
             </div>
         </div>
     );

@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
 import StoryModal from "./UI/modal/StoryModal";
+import { addNewCandidate} from "../lib/story";
 
-const CandidateAdd = () => {
+
+const CandidateAdd = ({ storyHead, onAdd }) => {
     const [candidate, setCandidate] = useState({title: '', body: ''})
-
-    let addNewCandidate = async (e) => {
-        e.preventDefault();
-        if (candidate.title && candidate.body) {
-            alert('This function is not added yet')
-        }
-    }
 
     return (
         <>
@@ -18,7 +13,7 @@ const CandidateAdd = () => {
                 buttonName="Create new"
                 onTitleChange={e => setCandidate({...candidate, title: e.target.value})}
                 onBodyChange={e => setCandidate({...candidate, body: e.target.value})}
-                onSave={addNewCandidate}
+                onSave={ addNewCandidate.bind(null, candidate, storyHead, onAdd) }
             />
         </>
     );

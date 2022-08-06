@@ -13,7 +13,7 @@ const StoryCreate = () => {
                 buttonName="Create new"
                 onTitleChange={e => setStory({...story, title: e.target.value})}
                 onBodyChange={e => setStory({...story, body: e.target.value})}
-                onSave={addNewStory}
+                onSave={addNewStory.bind(null, story)}
             />
         </>
     );

@@ -9,7 +9,6 @@ function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) 
 
     async function saveChanges(event) {
         await onSave(event);
-        console.log('On save func finished. Close modal')
         setShowModal(false);
     }
 
