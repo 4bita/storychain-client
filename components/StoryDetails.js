@@ -35,7 +35,7 @@ export default function StoryDetails({storyId}) {
                             <div key={s.id}>
                                 <h3 style={{marginTop: '20px'}}>{s.title}</h3>
                                 <hr />
-                                <div>{s.body}</div>
+                                <div>{s.content}</div>
                             </div>
                         )
                 }
@@ -53,7 +53,7 @@ export default function StoryDetails({storyId}) {
 
             <CandidateAdd
                 storyHead={ storyId }
-                onAdd={(new_candidate) => {
+                addCandidateOnUI={(new_candidate) => {
                     setCandidates([...candidates, new_candidate]);
                 }}
             />

@@ -3,7 +3,7 @@ import StoryModal from "./UI/modal/StoryModal";
 import { addNewCandidate} from "../lib/story";
 
 
-const CandidateAdd = ({ storyHead, onAdd }) => {
+const CandidateAdd = ({ storyHead, addCandidateOnUI }) => {
     const [candidate, setCandidate] = useState({title: '', body: ''})
 
     return (
@@ -13,7 +13,7 @@ const CandidateAdd = ({ storyHead, onAdd }) => {
                 buttonName="Create new"
                 onTitleChange={e => setCandidate({...candidate, title: e.target.value})}
                 onBodyChange={e => setCandidate({...candidate, body: e.target.value})}
-                onSave={ addNewCandidate.bind(null, candidate, storyHead, onAdd) }
+                onSave={ addNewCandidate.bind(null, candidate, storyHead, addCandidateOnUI) }
             />
         </>
     );

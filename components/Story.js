@@ -8,7 +8,7 @@ const Story = (props) => {
             <div>
                 <strong>{props.title}</strong>
                 <div>
-                    {props.body}
+                    {props.content}
                 </div>
             </div>
             <div>

@@ -40,7 +40,7 @@ const StoryList = () => {
                     : stories.map(story =>
                         <Story
                             id={story.key}
-                            body={story.body}
+                            content={story.content}
                             title={story.title}
                             key={story.id}
                             openStory={openStory}

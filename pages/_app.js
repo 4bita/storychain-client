@@ -30,7 +30,7 @@ function App({ Component, pageProps }) {
 
             <Header />
 
-            <div className="container">
+            <div className="container" style={{minHeight: "70vh"}}>
                 <div className="row justify-content-md-center">
                     <div className="col-8 align-self-center">
                         <ServerContext.Provider value={serverContext}>
