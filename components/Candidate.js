@@ -11,7 +11,7 @@ const Candidate = (props) => {
         setVotes(props.candidate.votes);
     }, [])
 
-    const onVote = () => {setVotes(votes + 1);}
+    const onVote = () => { setVotes(votes + 1); }
 
     return (
         <div className={styles.candidateCard}>
