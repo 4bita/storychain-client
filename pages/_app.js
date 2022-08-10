@@ -30,7 +30,7 @@ function App({ Component, pageProps }) {
 
             <Header />
 
-            <div className="container" style={{minHeight: "70vh"}}>
+            <main className="container" style={{ minHeight: "70vh", paddingTop: '85px' }}>
                 <div className="row justify-content-md-center">
                     <div className="col-8 align-self-center">
                         <ServerContext.Provider value={serverContext}>
@@ -38,9 +38,9 @@ function App({ Component, pageProps }) {
                         </ServerContext.Provider>
                     </div>
                 </div>
-            </div>
+            </main>
 
-            <Footer position={ asPath.startsWith('/stories') ? '' : 'fixed-bottom' }/>
+            <Footer position={asPath.startsWith('/stories') ? '' : 'fixed-bottom'} />
         </>
     );
 }
