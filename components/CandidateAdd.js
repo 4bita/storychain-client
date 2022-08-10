@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import StoryModal from "./UI/modal/StoryModal";
-import { addNewCandidate} from "../lib/story";
+import { addNewCandidate } from "../lib/story";
 
 
 const CandidateAdd = ({ storyHead, addCandidateOnUI }) => {

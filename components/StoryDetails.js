@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
+import ReactMarkdown from "react-markdown";
+
 import { ServerContext } from "./AppContext";
 import Candidate from "./Candidate";
 import CandidateAdd from "./CandidateAdd";
 import SpinnerCat from "./UI/spinner/SpinnerCat";
-
 import { loadCandidates, loadSubStories } from "../lib/loader";
 
 
@@ -35,7 +36,9 @@ export default function StoryDetails({storyId}) {
                             <div key={s.id}>
                                 <h3 style={{marginTop: '20px'}}>{s.title}</h3>
                                 <hr />
-                                <div>{s.content}</div>
+                                <div>
+                                    <ReactMarkdown>{s.content}</ReactMarkdown>
+                                </div>
                             </div>
                         )
                 }
