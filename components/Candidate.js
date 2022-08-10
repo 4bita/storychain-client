@@ -1,4 +1,6 @@
 import React, {  useEffect, useState } from 'react';
+import ReactMarkdown from "react-markdown";
+
 import MyButton from "./UI/button/MyButton";
 import styles from "../styles/Candidate.module.css";
 import { addCandidateVote } from "../lib/voting";
@@ -18,7 +20,7 @@ const Candidate = (props) => {
             <div>
                 <strong>{props.candidate.title}</strong>
                 <div>
-                    {props.candidate.body}
+                    <ReactMarkdown>{props.candidate.body}</ReactMarkdown>
                 </div>
             </div>
             <div>

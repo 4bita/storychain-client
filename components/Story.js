@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 import MyButton from "./UI/button/MyButton";
 import styles from '../styles/Story.module.css'
 
@@ -8,7 +9,7 @@ const Story = (props) => {
             <div>
                 <strong>{props.title}</strong>
                 <div>
-                    {props.content}
+                    <ReactMarkdown>{props.content}</ReactMarkdown>
                 </div>
             </div>
             <div>
