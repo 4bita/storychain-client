@@ -4,16 +4,17 @@ import { addNewStory } from '../lib/story.js';
 
 
 const StoryCreate = () => {
-    const [story, setStory] = useState({title: '', content: ''});
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
     return (
         <>
             <StoryModal
                 title="Create a new story"
                 buttonName="Create story"
-                onTitleChange={e => setStory({...story, title: e.target.value})}
-                onBodyChange={e => setStory({...story, content: e.target.value})}
-                onSave={addNewStory.bind(null, story)}
+                onTitleChange={e => setTitle(e.target.value)}
+                onBodyChange={e => setContent(e.target.value)}
+                onSave={() => addNewStory({ title, content })}
             />
         </>
     );
