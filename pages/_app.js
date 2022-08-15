@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -20,8 +19,6 @@ function App({ Component, pageProps }) {
         initServerContext(setServerContext).catch(console.error);
     }, []);
 
-    const { asPath } = useRouter();
-
     return (
         <>
             <Head>
@@ -30,17 +27,17 @@ function App({ Component, pageProps }) {
 
             <Header />
 
-            <div className="container" style={{minHeight: "70vh"}}>
+            <main className="container" style={{ minHeight: "86vh", paddingTop: '85px' }}>
                 <div className="row justify-content-md-center">
-                    <div className="col-8 align-self-center">
+                    <div className="col-sm-12 col-md-8 align-self-center">
                         <ServerContext.Provider value={serverContext}>
                             <Component {...pageProps} />
                         </ServerContext.Provider>
                     </div>
                 </div>
-            </div>
+            </main>
 
-            <Footer position={ asPath.startsWith('/stories') ? '' : 'fixed-bottom' }/>
+            <Footer />
         </>
     );
 }

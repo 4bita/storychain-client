@@ -1,6 +1,5 @@
 import React from "react";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
-import styles from "./StoryModal.module.css";
 import MyButton from "../button/MyButton";
 
 
@@ -16,19 +15,19 @@ function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) 
         <>
             <div style={{ marginTop: "20px", justifyContent: "right", display: "flex" }}>
                 <MyButton onClick={() => setShowModal(true)}>
-                    { buttonName }
+                    {buttonName}
                 </MyButton>
             </div>
             <Modal toggle={() => setShowModal(false)} isOpen={showModal}>
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                        { title }
+                        {title}
                     </h5>
                 </div>
                 <ModalBody>
                     <form>
                         <div className="form-group">
-                            <label className="col-form-label">Title:</label>
+                            <label className="col-form-label" htmlFor="modal-title">Title:</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -37,21 +36,29 @@ function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) 
                             />
                         </div>
                         <div className="form-group">
-                            <label className="col-form-label">Story text:</label>
+                            <label className="col-form-label" htmlFor="modal-content">Story text:</label>
                             <textarea
                                 rows="10"
                                 className="form-control"
-                                id="modal-body"
+                                id="modal-content"
                                 onChange={onBodyChange}
                             />
                         </div>
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={styles.closeButton} onClick={() => setShowModal(false)}>
+                    <button
+                        type="button"
+                        className="btn btn-sm btn-ghost rounded-md"
+                        onClick={() => setShowModal(false)}
+                    >
                         Close
                     </button>
-                    <button className={styles.saveButton} onClick={saveChanges}>
+                    <button
+                        type="button"
+                        className="btn btn-sm rounded-md text-white border-0 bg-blue-500 hover:bg-blue-600 active:bg-blue-700"
+                        onClick={saveChanges}
+                    >
                         Save changes
                     </button>
                 </ModalFooter>
