@@ -16,13 +16,13 @@ function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) 
         <>
             <div style={{ marginTop: "20px", justifyContent: "right", display: "flex" }}>
                 <MyButton onClick={() => setShowModal(true)}>
-                    { buttonName }
+                    {buttonName}
                 </MyButton>
             </div>
             <Modal toggle={() => setShowModal(false)} isOpen={showModal}>
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                        { title }
+                        {title}
                     </h5>
                 </div>
                 <ModalBody>

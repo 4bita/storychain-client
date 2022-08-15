@@ -10,7 +10,7 @@ const StoryCreate = () => {
         <>
             <StoryModal
                 title="Create a new story"
-                buttonName="Create new"
+                buttonName="Create story"
                 onTitleChange={e => setStory({...story, title: e.target.value})}
                 onBodyChange={e => setStory({...story, content: e.target.value})}
                 onSave={addNewStory.bind(null, story)}

@@ -19,7 +19,7 @@ export default function Header() {
     ]
 
     return (
-        <nav className="flex bg-white fixed w-full py-3 shadow-sm top-0" style={{height: '65px'}}>
+        <nav className="flex bg-white fixed w-full py-3 shadow-md border-b border-gray-400 top-0 z-10" style={{height: '65px'}}>
             <div className="flex justify-between w-full sm:w-5/6 md:w-4/6 px-3 mx-auto">
                 <div className="flex items-center">
                     <Link href="/stories">

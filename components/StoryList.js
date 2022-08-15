@@ -17,7 +17,7 @@ const StoryList = () => {
     }, [context]);
 
     return (
-        <div>
+        <>
             {
                 stories === null
                     ? <SpinnerCat />
@@ -30,7 +30,7 @@ const StoryList = () => {
                         />
                     )
             }
-        </div>
+        </>
     );
 };
 
