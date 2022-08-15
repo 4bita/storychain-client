@@ -8,34 +8,31 @@ import SpinnerCat from "./UI/spinner/SpinnerCat";
 import { loadCandidates, loadSubStories } from "../lib/loader";
 
 
-export default function StoryDetails({storyId}) {
+export default function StoryDetails({ storyId }) {
     const [candidates, setCandidates] = useState(null);
     const [subStories, setSubStories] = useState(null);
     const context = useContext(ServerContext);
 
     useEffect(() => {
-        if(context && storyId)
+        if (context && storyId)
             loadCandidates(storyId, setCandidates, context).catch(console.error);
     }, [context, storyId]);
     useEffect(() => {
-        if(context && storyId) {
+        if (context && storyId) {
             loadSubStories(storyId, setSubStories, context).catch(console.error);
         }
     }, [context, storyId]);
 
     return (
-        <div>
-            <br />
-
-            <h2 style={{margin: '20px'}}>Official story:</h2>
+        <div className="bg-white py-4 px-8 rounded-md">
+            <h2 className="font-medium">Official story</h2>
             <div className="CommittedStory">
                 {
                     subStories === null
                         ? <SpinnerCat />
                         : subStories.map(s =>
                             <div key={s.id}>
-                                <h3 style={{marginTop: '20px'}}>{s.title}</h3>
-                                <hr />
+                                <h3 style={{ marginTop: '20px' }}>{s.title}</h3>
                                 <div>
                                     <ReactMarkdown>{s.content}</ReactMarkdown>
                                 </div>
@@ -45,7 +42,7 @@ export default function StoryDetails({storyId}) {
             </div>
 
 
-            <h3 style={{paddingTop: '80px', margin: '20px'}}>Candidates to continue:</h3>
+            <h3 className="font-medium" style={{ marginTop: '80px' }}>Candidates to continue</h3>
             {
                 candidates === null
                     ? <SpinnerCat />
@@ -55,7 +52,7 @@ export default function StoryDetails({storyId}) {
             }
 
             <CandidateAdd
-                storyHead={ storyId }
+                storyHead={storyId}
                 addCandidateOnUI={(new_candidate) => {
                     setCandidates([...candidates, new_candidate]);
                 }}
