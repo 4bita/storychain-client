@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { ServerContext } from "./AppContext";
 import Candidate from "./Candidate";
 import CandidateAdd from "./CandidateAdd";
-import SpinnerCat from "./UI/spinner/SpinnerCat";
+import AppSpinner from "./UI/spinner/AppSpinner";
 import { loadCandidates, loadSubStories } from "../lib/loader";
 
 
@@ -25,11 +25,13 @@ export default function StoryDetails({ storyId }) {
 
     return (
         <div className="bg-white py-4 px-8 rounded-md">
-            <h2 className="font-medium">Official story</h2>
+            <h2 className="font-medium mb-3">Official story</h2>
             <div className="CommittedStory">
                 {
                     subStories === null
-                        ? <SpinnerCat />
+                        ? <div className="mx-auto text-center">
+                            <AppSpinner />
+                        </div>
                         : subStories.map(s =>
                             <div key={s.id}>
                                 <h3 style={{ marginTop: '20px' }}>{s.title}</h3>
@@ -45,7 +47,9 @@ export default function StoryDetails({ storyId }) {
             <h3 className="font-medium" style={{ marginTop: '80px' }}>Candidates to continue</h3>
             {
                 candidates === null
-                    ? <SpinnerCat />
+                    ? <div className="text-center">
+                        <AppSpinner />
+                    </div>
                     : candidates.map(c =>
                         <Candidate key={c.id} candidate={c} />
                     )

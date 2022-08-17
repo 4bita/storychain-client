@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import Story from "./Story";
-import SpinnerCat from "./UI/spinner/SpinnerCat";
+import AppSpinner from "./UI/spinner/AppSpinner";
 import { ServerContext } from "./AppContext";
 import { loadStories } from '../lib/loader';
 
@@ -20,7 +20,9 @@ const StoryList = () => {
         <>
             {
                 stories === null
-                    ? <SpinnerCat />
+                    ? <div className="text-center">
+                        <AppSpinner />
+                    </div>
                     : stories.map(story =>
                         <Story
                             id={story.key}
