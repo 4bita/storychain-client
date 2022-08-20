@@ -6,6 +6,8 @@ import Candidate from "./Candidate";
 import CandidateAdd from "./CandidateAdd";
 import AppSpinner from "./UI/spinner/AppSpinner";
 import { loadCandidates, loadSubStories } from "../lib/loader";
+import MyButton from "./UI/button/MyButton";
+import { collectStory } from "../lib/collect";
 
 
 export default function StoryDetails({ storyId }) {
@@ -41,6 +43,12 @@ export default function StoryDetails({ storyId }) {
                             </div>
                         )
                 }
+                <br />
+                <div className="rightButton">
+                    <MyButton onClick={() => {collectStory(storyId)}}>
+                        Collect
+                    </MyButton>
+                </div>
             </div>
 
 

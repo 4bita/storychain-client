@@ -16,6 +16,13 @@ a {
   box-sizing: border-box;
 }
 
+
+.rightButton {
+  margin-top: 20px;
+  justify-content: right;
+  display: flex;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
