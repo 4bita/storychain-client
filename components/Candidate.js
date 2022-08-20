@@ -6,31 +6,35 @@ import styles from "../styles/Candidate.module.css";
 import { addCandidateVote } from "../lib/voting";
 
 
-const Candidate = (props) => {
+const Candidate = ({ candidate }) => {
     const [votes, setVotes] = useState(0);
 
     useEffect(() => {
-        setVotes(props.candidate.votes);
+        setVotes(candidate.votes);
     }, [])
 
     const onVote = () => { setVotes(votes + 1); }
 
-    return (
-        <div className={styles.candidateCard}>
-            <div>
-                <strong>{props.candidate.title}</strong>
-                <div>
-                    <ReactMarkdown>{props.candidate.body}</ReactMarkdown>
+    if (candidate.title && candidate.content)
+        return (
+            <div className={styles.candidateCard}>
+                <div className="container">
+                    <div className="row">
+                        <strong>{candidate.title}</strong>
+                        <div>
+                            <ReactMarkdown>{candidate.content}</ReactMarkdown>
+                        </div>
+                    </div>
+                    <div className="row d-flex justify-content-end">
+                        <div className="col-2">
+                            Votes: {votes}
+                            <br />
+                            <MyButton onClick={ addCandidateVote.bind(null, candidate, onVote) }>Like</MyButton>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div>
-                Votes: {votes}
-                <br />
-                <br />
-                <MyButton onClick={ addCandidateVote.bind(null, props.candidate, onVote) }>Like</MyButton>
-            </div>
-        </div>
-    );
+        );
 };
 
 export default Candidate;

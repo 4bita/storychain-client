@@ -4,7 +4,7 @@ import { addNewCandidate } from "../lib/story";
 
 
 const CandidateAdd = ({ storyHead, addCandidateOnUI }) => {
-    const [candidate, setCandidate] = useState({title: '', body: ''})
+    const [candidate, setCandidate] = useState({title: '', content: ''})
 
     return (
         <>
@@ -12,7 +12,7 @@ const CandidateAdd = ({ storyHead, addCandidateOnUI }) => {
                 title="Propose another continuation:"
                 buttonName="Create new"
                 onTitleChange={e => setCandidate({...candidate, title: e.target.value})}
-                onBodyChange={e => setCandidate({...candidate, body: e.target.value})}
+                onBodyChange={e => setCandidate({...candidate, content: e.target.value})}
                 onSave={ addNewCandidate.bind(null, candidate, storyHead, addCandidateOnUI) }
             />
         </>
