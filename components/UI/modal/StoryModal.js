@@ -13,7 +13,7 @@ function StoryModal({ buttonName, title, onTitleChange, onBodyChange, onSave }) 
 
     return (
         <>
-            <div style={{ marginTop: "20px", justifyContent: "right", display: "flex" }}>
+            <div className="rightButton">
                 <MyButton onClick={() => setShowModal(true)}>
                     {buttonName}
                 </MyButton>
